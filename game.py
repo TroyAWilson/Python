@@ -29,11 +29,54 @@ story1 = "You do nothing, and nothing happens"
 story2 = 'You look around and find a dirty nail on the floor'
 story3 = 'The men outside the door are discussing the latest football game'
 story4 = 'You open the door and are immediatley struck down by the men outide'
+
+story_array = [
+    [
+        "You do nothing,and nothing happens",
+        'You look around and find a dirty nail on the floor',
+        'The men outside the door are discussing the latest football game',
+        'You open the door and are immediatley struck down by the men outide'
+    ],
+    [
+        '1 longer text',
+        '2 longer text',
+        '3 longer text',
+        '4 longer text'
+    ],
+    [
+        '1-2 longer text',
+        '2-2 longer text',
+        '3-2 longer text',
+        '4-2 longer text'
+    ]
+]
+
+
 #Dummy choices for testing choice functionality
 initial_choices = ['Do nothing', 'Look around', 'Listen at the door', 'Open the door']
 #Choices after initial Choices
-choices_1 = ['Dance','Go for brunch', 'Thrive', 'Trivia night']
-
+choices_array = [
+    [
+        ['Dance','Go for brunch', 'Thrive', 'Trivia night'],
+        ['1','2','3','4'],
+        ['one','two','three','four'],
+        ['ein','zwei','drei','weir']
+    ],
+    [
+        ['test1','test2','test3'],
+        ['turtles','orange','money','roosters'],
+        ['one','two','three','four'],
+        ['ein','zwei','drei','weir']
+    ],
+    [
+        ['Taako Taco'],
+        ['Magnus Burnsides'],
+        ['Merle Highchurch'],
+        ['Captain Captain Bane']
+    ]
+]
+choices_number = 0
+story_number = 0
 
 #clears the console/terminal to keep from cluttering
 def clear():
@@ -78,7 +121,7 @@ def character_info(player):
     character_info_input = raw_input('Press "B" to return to menu: ').upper()
     if character_info_input =='B':
         clear()
-        display_menu()
+        display_menu(story1,choices_array[choices_number][0])
 
 def write_text_scroll(text):
     """This class is used for the scrolling text, Will only be used for the initial instance of each text screen"""
@@ -97,19 +140,19 @@ def display_no_scroll(story,choice):
     initial_input = raw_input('Press "[1/2/3/4]" to enter your choice or press "M" to access the menu: ').upper()
     if initial_input == "M":
         clear()
-        display_menu(story1,choices_1)
+        display_menu(story1,choices_array[choices_number][0])
     elif initial_input == "1":
         clear()
-        display_screen(story1,choices_1)
+        display_screen(story1,choices_array[choices_number][0])
     elif initial_input == "2":
         clear()
-        display_screen(story2,choices_1)
+        display_screen(story2,choices_array[choices_number][1])
     elif initial_input == "3":
         clear()
-        display_screen(story3,choices_1)
+        display_screen(story3,choices_array[choices_number][2])
     elif initial_input == "4":
         clear()
-        display_screen(story4,choices_1)
+        display_screen(story4,choices_array[choices_number][3])
     print('-'*75)
 
 
@@ -118,27 +161,47 @@ def display_choices(choice_list):
         print('{} ) {} \n').format(index +1,choice)
 
 def display_screen(story, choice):
+    global choices_number
+    global story_number
     clear()
     write_text_scroll(story)
     print('\n')
-    display_choices(choices_1)
+    display_choices(choice)
     screen_input = raw_input('Press "[1/2/3/4]" to enter your choice or press "M" to access the menu: ').upper()
     if screen_input == "M":
         clear()
-        display_menu(story, choices_1)
+        display_menu(story_array[0],choices_array[choices_number][0])
     elif screen_input == "1":
         clear()
-        display_screen(story1,choices_1)
+        change_story()
+        change_number()
+        display_screen(story_array[story_number][0],choices_array[choices_number][0])
     elif screen_input == "2":
         clear()
-        display_screen(story2,choices_1)
+        change_story()
+        change_number()
+        display_screen(story_array[story_number][1],choices_array[choices_number][1])
     elif screen_input == "3":
         clear()
-        display_screen(story3,choices_1)
+        change_story()
+        change_number()
+        display_screen(story_array[story_number][2],choices_array[choices_number][2])
     elif screen_input == "4":
         clear()
-        display_screen(story4,choices_1)
+        change_story()
+        change_number()
+        display_screen(story_array[story_number][3],choices_array[choices_number][3])
 
+
+def change_number():
+    global choices_number
+    choices_number = choices_number + 1
+    return choices_number
+
+def change_story():
+    global story_number
+    story_number = story_number + 1
+    return story_number
 
 def display_initial_screen():
     """
@@ -157,13 +220,13 @@ def display_initial_screen():
         clear()
         display_menu(story, initial_choices)
     elif initial_input == "1":
-        display_screen(story1,choices_1)
+        display_screen(story1,choices_array[choices_number][0])
     elif initial_input == "2":
-        display_screen(story2,choices_1)
+        display_screen(story2,choices_array[choices_number][1])
     elif initial_input == "3":
-        display_screen(story3,choices_1)
+        display_screen(story3,choices_array[choices_number][2])
     elif initial_input == "4":
-        display_screen(story4,choices_1)
+        display_screen(story4,choices_array[choices_number][3])
     print('-'*75)
 
 display_initial_screen()
