@@ -55,7 +55,15 @@ story_array = [
 #Dummy choices for testing choice functionality
 initial_choices = ['Do nothing', 'Look around', 'Listen at the door', 'Open the door']
 #Choices after initial Choices
+#April 4th, So the choices and text work on a multidimensional array pulls from incrementing arrays
+#This way I'm able to use the same function recursively as to not over clutter and over complicate the project
 choices_array = [
+    [
+        ['Do nothing', 'Look around', 'Listen at the door', 'Open the door'],
+        ['1','2','3','4'],
+        ['one','two','three','four'],
+        ['ein','zwei','drei','weir']
+    ],
     [
         ['Dance','Go for brunch', 'Thrive', 'Trivia night'],
         ['1','2','3','4'],
@@ -69,10 +77,10 @@ choices_array = [
         ['ein','zwei','drei','weir']
     ],
     [
-        ['Taako Taco'],
-        ['Magnus Burnsides'],
-        ['Merle Highchurch'],
-        ['Captain Captain Bane']
+        ['Taako Taco','text','text','whoop'],
+        ['Magnus Burnsides','Julia','Johnson','Jwoo'],
+        ['Merle Highchurch','Goober','sweedle','hoot hoot'],
+        ['Captain Captain Bane','The Raven','Harley','Yeah true']
     ]
 ]
 choices_number = 0
@@ -121,7 +129,7 @@ def character_info(player):
     character_info_input = raw_input('Press "B" to return to menu: ').upper()
     if character_info_input =='B':
         clear()
-        display_menu(story1,choices_array[choices_number][0])
+        display_menu(story,choices_array[choices_number][0])
 
 def write_text_scroll(text):
     """This class is used for the scrolling text, Will only be used for the initial instance of each text screen"""
